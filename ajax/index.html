@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjex Practice</title>
+    <style>
+        html{
+            box-sizing: border-box;
+        }
+
+        *,*::before,*::after{
+            box-sizing: inherit;
+        }
+
+        .container{     
+            /* layout */  
+            display: flex;
+            justify-content:space-around;
+        }
+
+        .user-info{
+            /* layout */  
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            /* sytle */
+            background-color: antiquewhite;    
+        }
+
+        .user-info p{
+            padding: 0 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <article class="container">
+    </article>
+
+    <script>
+        const req = new XMLHttpRequest();
+        const url = 'https://reqres.in/api/users';
+
+        req.onload = () => {
+            if(req.status >= 200 && req.status < 400){
+                console.log("連線成功: ",req.responseText);
+                let userArr = getUserData(req.responseText);
+                userArr.map(appendUser);
+            }
+            else{          
+                console.log("連線失敗: ",req.status);
+            }
+        }
+
+        req.onerror = () => console.log("連線錯誤");
+        
+        req.open('GET',url,true);
+        req.send();
+
+        function getUserData(users){
+            return JSON.parse(users).data;
+        }
+
+        function appendUser(user){
+            let avatar = user.avatar;
+            let name = user.first_name + ' ' + user.last_name;
+
+            let userBox = document.createElement('div');
+            userBox.classList.add('user-info');
+            userBox.innerHTML = `
+                <p class="user-name">${name}</p>
+                <img src="${avatar}">
+            `;
+            document.querySelector('.container').appendChild(userBox);
+        }
+
+    </script>
+</body>
+</html>

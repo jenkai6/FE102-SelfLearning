@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Mgr</title>
+</head>
+<body>
+    <div class="contact-container">
+        <button id="contact-create-btn">新增聯絡人</button>
+    </div>
+    <script>
+        const contactContainer = document.querySelector('.contact-container');
+
+        // 當 新增聯絡人 click事件發生，則新增 contact-info
+        contactContainer.addEventListener('click',(e)=>{
+            if(e.target.id === 'contact-create-btn')
+                createContactInfo();
+            if(e.target.id === 'contact-info-delete-btn'){
+                let target = e.target.parentElement;
+                target.parentElement.removeChild(target);
+            }
+        });
+
+        // function: 新增 contact-info 
+        function createContactInfo(){
+            // alert('建立新聯絡人');
+            let newContact = document.createElement('div');
+            newContact.classList.add('contact-info');
+            newContact.innerHTML = 
+            `
+                <label>姓名:<input type="text"></label>
+                <label>電話:<input type="tel"></label>
+                <button id="contact-info-delete-btn">刪除</button>
+            `
+            document.querySelector('.contact-container').appendChild(newContact);
+        }
+    </script>
+</body>
+</html>

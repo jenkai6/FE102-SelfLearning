@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage</title>
+</head>
+<body>
+    <div>
+        <input type="text" class="input-text"><button type="button" class="input-btn">儲存</button>
+    </div>
+    <script>
+        // localStorage
+        // const inputText = document.querySelector('.input-text');
+        // const inputBtn = document.querySelector('.input-btn');
+        // inputText.value = window.localStorage.getItem('text');
+
+        // inputBtn.addEventListener('click',()=>{
+        //     window.localStorage.setItem('text',inputText.value);
+        // })
+
+         // sessionStorage
+        const inputText = document.querySelector('.input-text');
+        const inputBtn = document.querySelector('.input-btn');
+        inputText.value = window.sessionStorage.getItem('text');
+
+        inputBtn.addEventListener('click',()=>{
+            window.sessionStorage.setItem('text',inputText.value);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+
+    <style>
+        .result{
+            background-color: rgb(231, 231, 231);
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div>
+            <label><input type="checkbox" id="checkbox-en">英文</label>        
+        </div>
+        <div>
+            <label><input type="checkbox" id="checkbox-num">數字</label>
+        </div>
+        <div>
+            <label><input type="checkbox" id="checkbox-symbol">符號</label>
+        </div>
+        <div>
+            <label>字數<input type="number" id="pw-length"></label>
+        </div>
+        <div>
+            <button id="btn">產生</button>
+        </div>
+        <div class="result">           
+        </div>
+    </div>
+
+    <script>
+        const chkEn = document.querySelector('#checkbox-en');
+        const chkNum = document.querySelector('#checkbox-num');
+        const chkSymbol = document.querySelector('#checkbox-symbol');
+        const pwLength = document.querySelector('#pw-length');
+        const btn = document.querySelector('#btn');
+        const result = document.querySelector('.result');
+
+        btn.addEventListener('click',()=>{
+            result.innerText = generatePassword();
+        });
+
+        function generatePassword(){
+            let availableChar = ''; 
+            if(chkEn.checked)   availableChar += 'abcdefghijklmnopqrstuvwxyz';
+            if(chkNum.checked)   availableChar += '0123456789';
+            if(chkSymbol.checked)   availableChar += '!@#$%^&*()~+{}<>:';
+
+            let pw = '';
+
+            for(let i = 0; i < Number(pwLength.value); i++){
+                let id = Math.floor(Math.random() * availableChar.length);
+                pw += availableChar[id];
+            }
+
+            return pw;
+        }
+    </script>
+</body>
+</html>
